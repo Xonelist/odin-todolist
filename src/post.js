@@ -1,51 +1,38 @@
-class PostToDo {
-    constructor(title, description, priority){
+class ProjectsToDo {
+    constructor(title, description){
         this.title = title;
         this.description = description;
-        this.priority = priority;
-        this.content = [];
+        this.project = [];
     }
 
-    addContent(type, content, priority) {
+    addProject(type, project) {
         switch(type) {
             case 'list':
-                this.content.push(new PostList(content, priority));
+                this.project.push(new content());
                 break;
         }
     }
 
-    getContent() {
-        return this.content;
-    }
-
-    printPost() {
-          
+    getProject() {
+        return this.project;
     }
 }
 
-class PostList {
-    constructor(content, priority) {
-        this.content = content;
-        this.priority = priority;
-        this.elem = 'li';
-        this.type = 'list';
+class content {
+    constructor(projectTitle) {
+        this.projectTitle = projectTitle;
+        this.content = []
     }
 
-    printPost() {
-
+    addContent(content, type) {
+        this.content.push(new toDo(type, content));
     }
 }
 
-class PostCheck {
-    constructor(content, priority) {
+class toDo {
+    constructor(type, content) {
         this.content = content;
-        this.priority = priority;
-        this.elem = 'checkbox';
-        this.type = 'check'
-    }
-
-    printPost() {
-
+        this.type = type;
     }
 }
 
