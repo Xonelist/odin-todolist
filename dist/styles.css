@@ -2,13 +2,38 @@
     --card-bgcolor: #7ff0d5 ;
 }
 
-.cards-collections {
+body {
+    margin: 0;
+    display: flex;
+}
+
+.left-tab {
+    width: 250px;
+    height: 100vh;
+
+    background-color: var(--card-bgcolor);
+}
+
+.tab {
+    border: 2px solid lightsalmon;
+    margin: 10px 1px;
+}
+
+.sub-tab h3{
+    margin: 0;
+}
+
+.sub-tab:hover,
+.tab:hover {
+    background-color: aliceblue;
+    cursor: pointer;
+}
+
+.show-template {
     display: flex;
     flex-wrap: wrap;
-    overflow: scroll;
-    width:  90%;
-    height: 550px;
-    margin: 150px auto 100px;
+    overflow: auto;
+    width: 100%;
 
     padding: 2em;
     gap: 1.5em;
@@ -27,3 +52,8 @@
                 3px 2px 3px black ;
     
 }
+.button-module {
+    display: flex;
+    flex-direction: column;
+}
+

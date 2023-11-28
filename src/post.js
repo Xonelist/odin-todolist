@@ -1,3 +1,14 @@
+
+class DOMProject {
+    constructor() {
+        this.myProject = []
+    }
+
+    addMain(title, description) {
+        this.myProject.push(new ProjectsToDo(title, description));
+    }
+}
+
 class ProjectsToDo {
     constructor(title, description){
         this.title = title;
@@ -5,80 +16,93 @@ class ProjectsToDo {
         this.project = [];
     }
 
-    addProject(type, project) {
-        switch(type) {
-            case 'list':
-                this.project.push(new content());
-                break;
-        }
+    addProject(project) {
+        this.project.push(new Project(project));
     }
 
     getProject() {
         return this.project;
     }
+
+    printTemplate() {
+        const div = document.createElement('div');
+        const title = document.createElement('h1');
+        const desc = document.createElement('p');
+        title.textContent = `${this.title}`
+        desc.textContent = `${this.description}`
+        div.className = 'main-project';
+        div.appendChild(title);
+        div.appendChild(desc);
+
+        document.querySelector('.show-template').appendChild(div)
+        return div;
+    }
+
+    printCards() {
+        if (this.project.length !== 0) {
+            
+            const div = this.printTemplate()
+            for (let i in this.project) {
+                if (this.project[i].printCards()) {
+                    div.appendChild(this.project[i].printCards());
+                }
+            }
+            document.querySelector('.show-template').appendChild(div);
+            return div;
+        }
+    }
 }
 
-class content {
+class Project {
     constructor(projectTitle) {
         this.projectTitle = projectTitle;
-        this.content = []
+        this.content = [];
+        
     }
 
     addContent(content, type) {
-        this.content.push(new toDo(type, content));
+        this.content.push(new toDo(type, content, this.content.length+1));
+    }
+
+    printCards() {
+        const div = document.createElement('div');
+        div.className = 'Project-title';
+        const title = document.createElement('h2');
+        title.textContent = `${this.projectTitle}`;
+        div.appendChild(title);
+        if (this.content.length !== 0) {
+            
+            for (let i in this.content) {
+                div.appendChild(this.content[i].printCards());
+            }
+        }
+        return div;
+    
     }
 }
 
 class toDo {
-    constructor(type, content) {
+    constructor(type, content, id) {
+        this.id = id;
         this.content = content;
         this.type = type;
+        this.priority = false;
     }
-}
 
-class CollectionPost {
-    constructor(cards) {
-        this.cards = cards;
-    }
-    /* 
-        Cards structure
-        {
-            CardName : {
-                CardTitle : CardTitle,
-                CardDescription : CardDescription,
-                Content : [
-                    {type: type, content: content},
-                    {...},
-                    {type: type, content: content}
-                ]
-            }
-        }
-    */
-    addCard() {
-
-    }
-    
     printCards() {
-        for (let len in this.cards) {
-            const div = document.createElement('div');
-            div.className = 'card';
-            div.innerHTML = `<h1>${this.cards[len]['title']}</h1><p>${this.cards[len]['description']}</p>`;
-            console.log(div)
-            if (this.cards[len]['content'].length !== 0) {
-                const ol = document.createElement('ol')
-                for (let len1 in this.cards[len]['content']) {
-                    const li = document.createElement('li')
-                    li.textContent = this.cards[len]['content'][len1].content;
-                    ol.appendChild(li);
-                }
-                div.appendChild(ol);
-                document.querySelector('.cards-collections').appendChild(div);
-            } else {
-                console.log('there is no content here');
-            }
-
-        }
+        const div = document.createElement('div');
+        const chk = document.createElement('input');
+        const label = document.createElement('label');
+        div.className = `content-${this.id}`;
+        chk.type = 'checkbox';
+        chk.id = `content-${this.id}`;
+        label.textContent = `${this.content}`;
+        label.htmlFor = `content-${this.id}`;
+        div.appendChild(chk)
+        div.appendChild(label)
+        return div;
+        
     }
 }
 
-//export { postToDo }
+export { DOMProject }

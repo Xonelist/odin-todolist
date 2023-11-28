@@ -1,4 +1,9 @@
-const { postToDo } = require("./post");
+import { addButtonModule } from "./buttonModule";
+import { DOMProject } from "./post";
 
-const b = new postToDo('hello World');
-b.createElement();
+function basis() {
+    const a = new DOMProject()
+    addButtonModule(a);
+}
+
+basis()
