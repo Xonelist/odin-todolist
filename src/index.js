@@ -1,9 +1,27 @@
-import { addButtonModule } from "./buttonModule";
+import { createMainModal } from "./modal";
+import { createNavBar } from "./nav";
 import { DOMProject } from "./post";
 
-function basis() {
-    const a = new DOMProject()
-    addButtonModule(a);
+
+function main() {
+    const store = new DOMProject();
+    
+    test(store);
+    //add button function to add Main Project
+    
 }
 
-basis()
+function test(store) {
+    document.getElementById('getMainProject').addEventListener('submit', (event)=>{
+        event.preventDefault();
+        store.getForm();
+        store.navProject();
+        document.querySelector('.main-dialog').close();
+        
+    });
+
+    
+}
+createMainModal();
+createNavBar();
+main();

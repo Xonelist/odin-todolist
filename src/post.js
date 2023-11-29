@@ -1,11 +1,40 @@
 
 class DOMProject {
     constructor() {
-        this.myProject = []
+        this.myProject = {}
     }
 
     addMain(title, description) {
-        this.myProject.push(new ProjectsToDo(title, description));
+        this.myProject[title] = new ProjectsToDo(title, description);
+    }
+
+    saveDOM() {
+        localStorage.setItem('save', JSON.stringify(this.myProject))
+    }
+
+    getForm() {
+        const form = document.forms['getMainProject'];
+        
+        //check if there is already same title in main project, if true alert, otherwise create class ProjectToDo
+        !this.myProject.hasOwnProperty(form['project-title'].value) ? this.addMain(form['project-title'].value, form['project-desc'].value) : alert(`Project with the title \`${form['project-title'].value}\` has exist`);
+        this.saveDOM();
+        form.reset();
+    }
+
+    navProject() {
+        const nav = document.querySelector('.collection-main-project');
+        nav.textContent = '';
+        for (let obj in this.myProject) {
+            const h3 = document.createElement('h3');
+            h3.className = 'collection';
+            h3.textContent = obj;
+            h3.dataset.id = obj;
+            
+            h3.addEventListener('click', ()=> {
+                this.myProject[obj].printShowCollection();
+            })
+            nav.appendChild(h3);
+        }
     }
 }
 
@@ -17,39 +46,24 @@ class ProjectsToDo {
     }
 
     addProject(project) {
-        this.project.push(new Project(project));
+        this.project.push({title: new Project(project)});
     }
 
-    getProject() {
-        return this.project;
-    }
-
-    printTemplate() {
+    printShowCollection() {
+        const showCollection = document.querySelector('.show-template');
+        
         const div = document.createElement('div');
         const title = document.createElement('h1');
         const desc = document.createElement('p');
-        title.textContent = `${this.title}`
-        desc.textContent = `${this.description}`
-        div.className = 'main-project';
+
+        title.textContent = this.title;
+        desc.textContent = this.description;
+
         div.appendChild(title);
         div.appendChild(desc);
-
-        document.querySelector('.show-template').appendChild(div)
-        return div;
-    }
-
-    printCards() {
-        if (this.project.length !== 0) {
-            
-            const div = this.printTemplate()
-            for (let i in this.project) {
-                if (this.project[i].printCards()) {
-                    div.appendChild(this.project[i].printCards());
-                }
-            }
-            document.querySelector('.show-template').appendChild(div);
-            return div;
-        }
+        
+        showCollection.textContent = '';
+        showCollection.appendChild(div);
     }
 }
 
@@ -63,22 +77,6 @@ class Project {
     addContent(content, type) {
         this.content.push(new toDo(type, content, this.content.length+1));
     }
-
-    printCards() {
-        const div = document.createElement('div');
-        div.className = 'Project-title';
-        const title = document.createElement('h2');
-        title.textContent = `${this.projectTitle}`;
-        div.appendChild(title);
-        if (this.content.length !== 0) {
-            
-            for (let i in this.content) {
-                div.appendChild(this.content[i].printCards());
-            }
-        }
-        return div;
-    
-    }
 }
 
 class toDo {
@@ -87,21 +85,6 @@ class toDo {
         this.content = content;
         this.type = type;
         this.priority = false;
-    }
-
-    printCards() {
-        const div = document.createElement('div');
-        const chk = document.createElement('input');
-        const label = document.createElement('label');
-        div.className = `content-${this.id}`;
-        chk.type = 'checkbox';
-        chk.id = `content-${this.id}`;
-        label.textContent = `${this.content}`;
-        label.htmlFor = `content-${this.id}`;
-        div.appendChild(chk)
-        div.appendChild(label)
-        return div;
-        
     }
 }
 

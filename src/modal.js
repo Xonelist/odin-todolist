@@ -19,9 +19,10 @@ function createMainModal() {
     form.action = '';
     form.method = 'post';
     form.id = 'getMainProject';
-
-    div.className = 'form-input'
-        //input,label, submit attribute
+    form.name = 'getMainProject';
+    div.className = 'form-input';
+    
+    //input,label, submit attribute
     const formlist = [
         {
             'inputType': 'text',
@@ -39,7 +40,8 @@ function createMainModal() {
 
         input.type = list['inputType'];
         input.id = list['inputId'];
-        input.required;
+        input.name = list['inputId'];
+        input.required = true;
 
         label.setAttribute('for', list['inputId']);
         label.textContent = list['labelContent'];
@@ -51,7 +53,7 @@ function createMainModal() {
     submit.type = 'submit';
     submit.id = "main-btn-submit";
     submit.textContent = "Add Main Project";
-
+    
     //append to form
     form.appendChild(div);
     form.appendChild(submit);
@@ -61,3 +63,5 @@ function createMainModal() {
 
     document.body.append(dialog)
 }
+
+export { createMainModal }
