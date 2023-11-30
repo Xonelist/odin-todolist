@@ -1,27 +1,13 @@
-import { createMainModal } from "./modal";
+import { buttonSubmit } from "./buttonModule";
+import { CreateAllDialog } from "./modal";
 import { createNavBar } from "./nav";
-import { DOMProject } from "./post";
+import { LocalStore } from "./post";
 
 
 function main() {
-    const store = new DOMProject();
-    
-    test(store);
-    //add button function to add Main Project
-    
+    const store = new LocalStore();
+    buttonSubmit(store);
 }
-
-function test(store) {
-    document.getElementById('getMainProject').addEventListener('submit', (event)=>{
-        event.preventDefault();
-        store.getForm();
-        store.navProject();
-        document.querySelector('.main-dialog').close();
-        
-    });
-
-    
-}
-createMainModal();
+CreateAllDialog();
 createNavBar();
 main();

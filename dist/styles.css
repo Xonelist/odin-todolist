@@ -1,6 +1,7 @@
 :root {
     --card-bgcolor: #7ff0d5 ;
     --hover-color:aliceblue;
+    --border-color: linear-gradient(90deg, rgba(140,170,185,1) 0%, rgba(68,109,130,1) 49%, rgba(140,170,185,1) 100%);
 }
 
 body {
@@ -27,7 +28,8 @@ body {
 .sub-tab:hover,
 .tab:hover,
 .btn-span:hover,
-.collection:hover {
+.collection:hover,
+#add-sub:hover {
     background-color: var(--hover-color);
     cursor: pointer;
 }
@@ -40,6 +42,7 @@ body {
 }
 .show-template {
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
     overflow: auto;
     width: 100%;
@@ -54,7 +57,46 @@ body {
     flex-direction: column;
 }
 
+/*Inside Show-collection*/
+.main-border {
+    text-align: right;
+
+    border-bottom: 1px solid;
+    border-image-slice: 1;
+    border-width: 2px;
+    border-image-source: var(--border-color);
+    padding: 8px;
+}
+
+.sub-border {
+    display: flex;
+    justify-content: space-between;
+    --border-color: linear-gradient(90deg, rgba(255,149,0,1) 0%, rgba(246,181,38,1) 49%, rgba(255,149,0,1) 100%);
+    border-bottom: 1px solid;
+    border-image-slice: 1;
+    border-width: 1px;
+    border-image-source: var(--border-color);
+    padding: 1px;    
+}
+
+.edit-btn {
+    display: flex;
+    gap: 1em;
+}
 /*dialog*/
+
+
+
+#add-sub {
+    --hover-color: rgba(68,109,130,1);
+    --hover-radius: 5px;
+
+    display: inline;
+    padding: 5px;
+    border-radius: var(--hover-radius);
+    box-shadow: 1px 1px 3px rgba(140,170,185,1),-1px -1px 5px rgba(140,170,185,1) ;
+}
+
 dialog {
     --hover-color: red;
     

@@ -25,7 +25,7 @@ function createNavBar() {
     const h3 = document.createElement('h3');
     h3.id = "btn-add"
     h3.textContent = 'Add new Main Project';
-    h3.addEventListener('click', ()=>document.querySelector('.main-dialog').showModal())
+    h3.addEventListener('click', ()=>document.getElementById('main-dialog').showModal())
     div.appendChild(h3);
     nav.appendChild(div);
 
@@ -33,10 +33,6 @@ function createNavBar() {
     myProject.className = 'collection-main-project';
     nav.appendChild(myProject);
     document.body.insertBefore(nav, document.body.firstChild);
-}
-
-function createNavProject () {
-
 }
 
 export {createNavBar}
