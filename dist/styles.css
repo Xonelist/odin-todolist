@@ -1,29 +1,124 @@
 :root {
     --card-bgcolor: #7ff0d5 ;
+    --hover-color:aliceblue;
+    --border-color: linear-gradient(90deg, rgba(140,170,185,1) 0%, rgba(68,109,130,1) 49%, rgba(140,170,185,1) 100%);
 }
 
-.cards-collections {
+body {
+    margin: 0;
     display: flex;
+}
+
+.left-tab {
+    width: 250px;
+    height: 100vh;
+
+    background-color: var(--card-bgcolor);
+}
+
+.tab {
+    border: 2px solid lightsalmon;
+    margin: 10px 1px;
+}
+
+.sub-tab h3{
+    margin: 0;
+}
+
+.sub-tab:hover,
+.tab:hover,
+.btn-span:hover,
+.collection:hover,
+#add-sub:hover {
+    background-color: var(--hover-color);
+    cursor: pointer;
+}
+
+.collection {
+    text-align: right;
+    padding: 0.5em;
+    border-radius: 5px;
+    margin: 0 auto;
+}
+.show-template {
+    display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
-    overflow: scroll;
-    width:  90%;
-    height: 550px;
-    margin: 150px auto 100px;
+    overflow: auto;
+    width: 100%;
 
     padding: 2em;
     gap: 1.5em;
     border: 2px solid gray;
 }
 
-.card {
-    background-color: var(--card-bgcolor);
-    width: 200px;
-    height: 300px;
-    margin: auto;
-    align-self: self-start;
-    padding: 1em;
-    border-radius: 5px;
-    box-shadow: inset 5px 3px 10px #8cffe6,
-                3px 2px 3px black ;
+.button-module {
+    display: flex;
+    flex-direction: column;
+}
+
+/*Inside Show-collection*/
+.main-border {
+    text-align: right;
+
+    border-bottom: 1px solid;
+    border-image-slice: 1;
+    border-width: 2px;
+    border-image-source: var(--border-color);
+    padding: 8px;
+}
+
+.sub-border {
+    display: flex;
+    justify-content: space-between;
+    --border-color: linear-gradient(90deg, rgba(255,149,0,1) 0%, rgba(246,181,38,1) 49%, rgba(255,149,0,1) 100%);
+    border-bottom: 1px solid;
+    border-image-slice: 1;
+    border-width: 1px;
+    border-image-source: var(--border-color);
+    padding: 1px;    
+}
+
+.edit-btn {
+    display: flex;
+    gap: 1em;
+}
+/*dialog*/
+
+
+
+#add-sub {
+    --hover-color: rgba(68,109,130,1);
+    --hover-radius: 5px;
+
+    display: inline;
+    padding: 5px;
+    border-radius: var(--hover-radius);
+    box-shadow: 1px 1px 3px rgba(140,170,185,1),-1px -1px 5px rgba(140,170,185,1) ;
+}
+
+dialog {
+    --hover-color: red;
     
+    position: relative;
+    flex-direction: column;
+    margin: 15% auto;
+    padding: 1em;
+}
+
+.form-input {
+    display: flex;
+    flex-direction: column;
+    margin: 1em;
+    gap: 0.5em;
+}
+dialog::backdrop {
+    background: black;
+    opacity: 0.5;
+}
+
+.btn-span {
+    position: absolute;
+    top: 10px;
+    right: 10px;
 }

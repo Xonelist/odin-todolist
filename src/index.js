@@ -1,4 +1,13 @@
-const { postToDo } = require("./post");
+import { buttonSubmit } from "./buttonModule";
+import { CreateAllDialog } from "./modal";
+import { createNavBar } from "./nav";
+import { LocalStore } from "./post";
 
-const b = new postToDo('hello World');
-b.createElement();
+
+function main() {
+    const store = new LocalStore();
+    buttonSubmit(store);
+}
+CreateAllDialog();
+createNavBar();
+main();
