@@ -1,8 +1,7 @@
 function createMainModal() {
-    const dialog = document.createElement('dialog');
-    const close = document.createElement('span');
-    const form = document.createElement('form');
     
+    const dialog = document.createElement('dialog');
+    const close = document.createElement('span');    
 
     //make Close button
     close.className = 'btn-span';
@@ -10,19 +9,9 @@ function createMainModal() {
     close.addEventListener('click', ()=> dialog.close());
 
     //make dialog attribute
-    dialog.className = 'main-dialog';
+    dialog.id = 'main-dialog';
 
-    //form structure
-    const div = document.createElement('div');
-    const submit = document.createElement('button');
-
-    form.action = '';
-    form.method = 'post';
-    form.id = 'getMainProject';
-    form.name = 'getMainProject';
-    div.className = 'form-input';
-    
-    //input,label, submit attribute
+    //create Form
     const formlist = [
         {
             'inputType': 'text',
@@ -33,7 +22,42 @@ function createMainModal() {
             'inputId': 'project-desc',
             'labelContent': 'New Project Description'
         }   
-    ]
+    ];
+    const submitList = {
+        'id': 'main-btn-submit',
+        'content': 'Add Main Project',
+    };
+    const form = createForm('getMainProject', formlist, submitList);
+
+    dialog.appendChild(close);
+    dialog.appendChild(form);
+
+    document.body.append(dialog)
+}
+
+function createSubModal() {
+    const dialog = document.createElement('dialog');
+    const close = document.createElement('span');
+    const form = document.createElement('form');
+
+
+}
+function createDialog(id) {
+
+}
+function createForm(id, formlist, submitList) {
+    //form structure
+    const form = document.createElement('form');
+    const div = document.createElement('div');
+    const submit = document.createElement('button');
+
+    form.action = '';
+    form.method = 'post';
+    form.id = id;
+    form.name = id;
+    div.className = 'form-input';
+
+    //input,label, submit attribute
     formlist.forEach((list) => {
         const input = document.createElement('input');
         const label = document.createElement('label');
@@ -46,22 +70,18 @@ function createMainModal() {
         label.setAttribute('for', list['inputId']);
         label.textContent = list['labelContent'];
 
+        //append to form
         div.appendChild(label);
         div.appendChild(input);
     })
 
     submit.type = 'submit';
-    submit.id = "main-btn-submit";
-    submit.textContent = "Add Main Project";
-    
-    //append to form
+    submit.id = submitList['id'];
+    submit.textContent = submitList['content'];
+
     form.appendChild(div);
     form.appendChild(submit);
 
-    dialog.appendChild(close);
-    dialog.appendChild(form);
-
-    document.body.append(dialog)
+    return form;
 }
-
 export { createMainModal }
